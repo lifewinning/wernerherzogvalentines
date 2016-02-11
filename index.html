@@ -3,7 +3,6 @@
   <title>Werner Herzog Valentines</title>
   <style type="text/css">
 body {
-    font-size: 1.5em;
     display: flex;
     align-items:center;
     background-color:pink;
@@ -19,14 +18,21 @@ body {
     order: 1;
     background-color: #D27FA9;
     padding: 1.5em;
-    margin: .5em;
+    margin: .15em;
 }
 h1{
   font-style: italic;
+  font-size: 3em;
+}
+a{
+  text-decoration: none;
+  color:rebeccapurple;
+  background-color: #ccc;
+  padding: .1em;
 }
 
   </style>
-<!-- fine fine it'll be faster to just use some libraries don't judge me -->
+<!-- probably don't need to use jquery idk idk -->
   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="html2canvas.js"></script>
   <script src="FileSaver.min.js"></script>
@@ -42,7 +48,7 @@ h1{
       t.innerHTML = message[Math.floor(Math.random() * message.length)]
       footer = document.createElement('div')
       footer.id = 'footer'
-      footer.innerHTML = '<a href="javascript:saveValentine()">&hearts; Save This Valentine</a><br><a href="javascript:newValentine()">&orarr; Show Me Another Valentine</a>'
+      footer.innerHTML = '<a href="javascript:saveValentine()">&hearts; Save This Valentine</a> <a href="javascript:newValentine()">&orarr; Show Me Another Valentine</a> <a href="https://github.com/lifewinning/wernerherzogvalentines/blob/gh-pages/valentines.txt">&hearts; Contribute Valentines</a>'
       val = document.createElement('div')
       val.id = 'valentine'
       val.appendChild(t)
