@@ -1,0 +1,89 @@
+<html>
+<head>
+  <title>Werner Herzog Valentines</title>
+  <style type="text/css">
+body {
+    font-size: 1.5em;
+    display: flex;
+    align-items:center;
+    background-color:pink;
+    flex-flow: row-wrap;
+    justify-content:center;
+  }
+
+#image{
+    order: 0;
+}
+
+#valentine{
+    order: 1;
+    background-color: #D27FA9;
+    padding: 1.5em;
+    margin: .5em;
+}
+h1{
+  font-style: italic;
+}
+
+  </style>
+<!-- fine fine it'll be faster to just use some libraries don't judge me -->
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="html2canvas.js"></script>
+  <script src="FileSaver.min.js"></script>
+  <script type="text/javascript">
+    message = []
+    
+    function newValentine(){
+      v = document.getElementById('valentine')
+
+      if (v) {document.body.removeChild(v)};
+      
+      t = document.createElement('h1')
+      t.innerHTML = message[Math.floor(Math.random() * message.length)]
+      footer = document.createElement('div')
+      footer.id = 'footer'
+      footer.innerHTML = '<a href="javascript:saveValentine()">&hearts; Save This Valentine</a><br><a href="javascript:newValentine()">&orarr; Show Me Another Valentine</a>'
+      val = document.createElement('div')
+      val.id = 'valentine'
+      val.appendChild(t)
+      val.appendChild(footer)
+      document.body.appendChild(val)
+    }
+    function saveValentine(){
+      $('#footer').hide()
+      html2canvas(document.body, {
+        onrendered: function(canvas) {
+        img=canvas.toDataURL("image/png");
+        var data = atob( img.substring( "data:image/png;base64,".length ) ),
+            dataArray = new Uint8Array(data.length);
+
+        for( var i = 0, len = data.length; i < len; ++i ) {
+            dataArray[i] = data.charCodeAt(i);    
+        }
+
+        var blob = new Blob( [ dataArray.buffer ], {type: "image/png"} );
+        saveAs(blob, "valentine.png")
+          }
+      }); 
+      $('#footer').show()
+    }
+    $(document).ready(function(){
+     $.get('valentines.txt', function(v){
+          text = v.split("\n")
+          for (var i = 0; i < text.length; i++) {
+            message.push (text[i])
+          }
+          newValentine()
+        })
+      })
+   
+  </script>
+</head>
+<body>
+<div id ="image">
+  <img src="werner.jpg">
+</div>
+<div id="valentine"></div>
+
+</body>
+</html>
